@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c200f109559529d48bb75cd8ee00fd67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bottomOfTurret: {fileID: 368925415413596343}
   changeTargetDistanceOffset: 0.3
   shootRangeDistance: 6
   rotationSpeed: 7

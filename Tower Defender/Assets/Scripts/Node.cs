@@ -8,6 +8,7 @@ public class Node : MonoBehaviour
     public Color hoverColor;
 
     private GameObject nodeTurret = null;
+    [SerializeField] private Transform turretPositionInNode = null;
     private Renderer rend = null;
     private Color startColor;
 
@@ -33,7 +34,13 @@ public class Node : MonoBehaviour
         if (CurrencyManager.Instance.ChangeMoney(-10f))
         {
             nodeTurret = BuildManager.Instance.BuildTurret();
-            nodeTurret.transform.position = this.transform.position;
+
+            var bottomPositionOfTurret = nodeTurret.GetComponent<Turret>().bottomOfTurret.localPosition;
+            var distanceOfTurretsPositionToItsFeet = Mathf.Abs(nodeTurret.transform.localPosition.y) + Mathf.Abs(bottomPositionOfTurret.y);
+            
+            var newTurretPlacement = turretPositionInNode.position + new Vector3(0, distanceOfTurretsPositionToItsFeet, 0);
+
+            nodeTurret.transform.position = newTurretPlacement;
         }
         else
         {

@@ -90,5 +90,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749e14a810e6a7a4c93961dc434addd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstScene: MainMenu
-  loadingScrenn: {fileID: 0}
+  firstScene: 

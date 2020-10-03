@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WavesManager : MonoBehaviour
+public class WaveSpawner : MonoBehaviour
 {
 
     private Wave currentWave;
@@ -74,7 +74,7 @@ public class WavesManager : MonoBehaviour
 
         for(int i = 0; i < sequence.amountOfEnemies; i++)
         {
-            var enemy = Instantiate(sequence.prefab, spawnTransform);
+            var enemy = Instantiate(sequence.prefab, spawnTransform.position, spawnTransform.rotation);
 
             var enemyAiController = enemy.GetComponent<EnemyAIController>();
             enemyAiController.SetDestination(endTransform.position);

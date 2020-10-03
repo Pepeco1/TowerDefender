@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
+  turretPositionInNode: {fileID: 8342137690487977363}
 --- !u!1 &4140892652296358882
 GameObject:
   m_ObjectHideFlags: 0

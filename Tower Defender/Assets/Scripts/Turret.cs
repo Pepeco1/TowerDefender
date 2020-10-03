@@ -4,6 +4,8 @@ public class Turret : MonoBehaviour
 {
     public IEnemy targetEnemy { get; private set; }
 
+    public Transform bottomOfTurret = null;
+
     private const int angleToLock = 20;
     [SerializeField] private float changeTargetDistanceOffset = 0.3f;
 
@@ -29,7 +31,7 @@ public class Turret : MonoBehaviour
     private void Start()
     {
 
-        InvokeRepeating("UpdateTargetEnemy", 0f, 0.05f);
+        InvokeRepeating("UpdateTargetEnemy", 0f, 0.1f);
 
         SetGunsShootPermission();
     }
@@ -71,6 +73,9 @@ public class Turret : MonoBehaviour
     private void UpdateTargetEnemy()
     {
         IEnemy possibleNewEnemy = EnemyManager.Instance.GetClosestEnemy(transform.position);
+
+        if (possibleNewEnemy == null)
+            return;
 
         float newEnemyDistance = Vector3.Distance(transform.position, possibleNewEnemy.Transform.position);
         float currentDistance = (targetEnemy == null || targetEnemy.GameObject.activeSelf == false) ? Mathf.Infinity : Vector3.Distance(transform.position, targetEnemy.Transform.position);
