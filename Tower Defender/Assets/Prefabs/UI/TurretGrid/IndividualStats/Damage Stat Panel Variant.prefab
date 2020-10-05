@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1464067782350709628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302502673352857679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0902aaa04317cdc4c87e52bcf3623169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2649789655230293602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25,7 +37,7 @@ PrefabInstance:
     - target: {fileID: 653348541761004872, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 653348541761004872, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
@@ -40,7 +52,12 @@ PrefabInstance:
     - target: {fileID: 653348541761004872, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
       propertyPath: m_fontSize
-      value: 40
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 653348541761004872, guid: 8b7d3d997e43c2241a6de337bb679c16,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 513
       objectReference: {fileID: 0}
     - target: {fileID: 653348543393185322, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
@@ -150,7 +167,13 @@ PrefabInstance:
     - target: {fileID: 653348543393185325, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
       propertyPath: m_Name
-      value: Damage Stat Panel
+      value: Damage Stat Panel Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b7d3d997e43c2241a6de337bb679c16, type: 3}
+--- !u!1 &3302502673352857679 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 653348543393185325, guid: 8b7d3d997e43c2241a6de337bb679c16,
+    type: 3}
+  m_PrefabInstance: {fileID: 2649789655230293602}
+  m_PrefabAsset: {fileID: 0}

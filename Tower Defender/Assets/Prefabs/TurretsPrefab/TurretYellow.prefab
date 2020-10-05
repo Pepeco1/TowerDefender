@@ -66,11 +66,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1d0d84d32de54c5429eee8a961fbf351, type: 2}
+      objectReference: {fileID: 2100000, guid: 8e41f6f3ecaea0c4c907a51d4c7d778c, type: 2}
     - target: {fileID: 4101459098100286406, guid: 39bab003439541248a7987cf08c3ed46,
         type: 3}
       propertyPath: m_Name
-      value: TurretPurple
+      value: TurretYellow
       objectReference: {fileID: 0}
+    - target: {fileID: 7610898578642575954, guid: 39bab003439541248a7987cf08c3ed46,
+        type: 3}
+      propertyPath: turretInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c9856fae1ae26a4c853a9022843d26b,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39bab003439541248a7987cf08c3ed46, type: 3}

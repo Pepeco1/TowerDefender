@@ -6,18 +6,17 @@ using UnityEngine;
 public class Gun : MonoBehaviour, IGun
 {
 
-    public float ShootingDelay { get => _shootingDelay; set => _shootingDelay = value; }
     public float NextShotTime { get; set; }
     public bool CanShoot { get; set; }
+    public float GunDamage { get => _gunInfo.GunDamage; private set { } }
+    public GunInfo GunInfo { get => _gunInfo; set { } }
 
     [SerializeField]
     private Transform gunTip = null;
     [SerializeField]
-    private float _shootingDelay = 1f;
-    [SerializeField]
     private float bulletDamageMultiplier = 1f;
-    [SerializeField]
-    private float bulletSpeed = 10f;
+
+    [SerializeField] private GunInfo _gunInfo= null;
 
     private Turret myTurret = null;
 
@@ -45,10 +44,10 @@ public class Gun : MonoBehaviour, IGun
             bullet.transform.position = gunTip.position;
             bullet.transform.rotation = myTurret.GetLookinDir();
             bullet.targetToFollow = myTurret.targetEnemy;
-            bullet.damageMultiplier = bulletDamageMultiplier;
-            bullet.speed = bulletSpeed;
+            bullet.TotalDamage = _gunInfo.GunDamage;
+            bullet.speed = _gunInfo.BulletSpeed;
 
-            NextShotTime = Time.time + ShootingDelay;
+            NextShotTime = Time.time + _gunInfo.ShootingDelay;
 
         }
 

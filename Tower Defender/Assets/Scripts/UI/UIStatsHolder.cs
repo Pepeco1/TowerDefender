@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UITurretStats : BaseUIPanel
+public class UIStatsHolder : BaseUIPanel
 {
 
 }

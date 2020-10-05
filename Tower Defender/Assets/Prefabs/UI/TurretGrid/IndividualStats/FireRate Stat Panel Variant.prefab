@@ -25,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 653348541761004872, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 653348541761004872, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
@@ -40,7 +40,12 @@ PrefabInstance:
     - target: {fileID: 653348541761004872, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
       propertyPath: m_fontSize
-      value: 40
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 653348541761004872, guid: 8b7d3d997e43c2241a6de337bb679c16,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 513
       objectReference: {fileID: 0}
     - target: {fileID: 653348543393185322, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
@@ -150,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 653348543393185325, guid: 8b7d3d997e43c2241a6de337bb679c16,
         type: 3}
       propertyPath: m_Name
-      value: FireRate Stat Panel
+      value: FireRate Stat Panel Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b7d3d997e43c2241a6de337bb679c16, type: 3}

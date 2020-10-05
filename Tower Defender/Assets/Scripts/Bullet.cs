@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public float damageMultiplier = 1f;
     [HideInInspector] public float speed = 10f;
 
-    public float TotalDamage { get => baseDamage * damageMultiplier; private set { } }
+    public float TotalDamage { get => baseDamage; set => baseDamage = value;  }
     private float baseDamage = 10;
     private float lifeSpan = 2f;
 

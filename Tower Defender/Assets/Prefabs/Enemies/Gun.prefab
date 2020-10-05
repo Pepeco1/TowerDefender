@@ -234,9 +234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc04c2317fe21a24f91890804eb30947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bulletPrefab: {fileID: 4519236628612607, guid: 208e8af02a894384388c55fe88b6b149,
-    type: 3}
   gunTip: {fileID: 5845585183704703135}
-  _shootingDelay: 0.3
   bulletDamageMultiplier: 1
-  bulletSpeed: 10
+  _gunInfo: {fileID: 11400000, guid: fd99884339d4ebd4594374b714e8f9a7, type: 2}
