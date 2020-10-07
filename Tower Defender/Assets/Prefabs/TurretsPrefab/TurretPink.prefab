@@ -62,15 +62,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3695743514908085207, guid: 39bab003439541248a7987cf08c3ed46,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8e41f6f3ecaea0c4c907a51d4c7d778c, type: 2}
     - target: {fileID: 4101459098100286406, guid: 39bab003439541248a7987cf08c3ed46,
         type: 3}
       propertyPath: m_Name
-      value: TurretYellow
+      value: TurretPink
       objectReference: {fileID: 0}
+    - target: {fileID: 7610898578642575954, guid: 39bab003439541248a7987cf08c3ed46,
+        type: 3}
+      propertyPath: turretInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 53cba1f5d0580e64fa031c490cddd9e8,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39bab003439541248a7987cf08c3ed46, type: 3}

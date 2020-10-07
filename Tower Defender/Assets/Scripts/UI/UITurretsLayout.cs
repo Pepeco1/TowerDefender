@@ -9,13 +9,16 @@ public class UITurretsLayout : BaseUIPanel
     public int selectedIndex = 0;
     public UITurretNodeFlyWeight turretNodeFlyWeight = new UITurretNodeFlyWeight();
    
-    [SerializeField] private List<UITurretNode> turretNodesList = new List<UITurretNode>();
+    [SerializeField] private UITurretNode[] turretNodesList = null;
 
     private UITurretNode currentSelected = null;
 
     private void Awake()
     {
-        for (int i = 0; i < turretNodesList.Count; i++)
+
+        turretNodesList = GetComponentsInChildren<UITurretNode>();
+
+        for (int i = 0; i < turretNodesList.Length; i++)
             turretNodesList[i].index = i;
     }
 

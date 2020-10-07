@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using System;
+using System.Collections;
 
-public class UITurretNode : BaseUIPanel, IPointerDownHandler
+public class UITurretNode : BaseUIPanel, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public int index = -1;
     public bool IsSelected
@@ -19,16 +22,46 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler
         }
     }
 
+    public Turret TurretPrefab { get => turretPrefab; set { } }
+    public Turret InstantiatedTurret { get => instantiatedTurret; private set { } }
+
+
     private bool _isSelected = false;
 
-    private Image myImage = null;
-    private UITurretsLayout turretsLayout = null;
 
-    private void Awake()
+    private Image myImage = null;
+    private Button myButton = null;
+    private UITurretsLayout turretsLayout = null;
+    private BuildManager buildManager = null;
+    private UIStatsHolder statsPanel = null;
+    [SerializeField] Turret turretPrefab = null;
+    Turret instantiatedTurret = null;
+
+    private UnityAction onButtonClicked = null;
+
+    protected void Awake()
     {
+        myButton = GetComponent<Button>();
         myImage = GetComponent<Image>();
         turretsLayout = GetComponentInParent<UITurretsLayout>();
+        buildManager = BuildManager.Instance;
+        statsPanel = GetComponentInChildren<UIStatsHolder>(true);
+
+        instantiatedTurret = Instantiate(turretPrefab, new Vector3(-100, -100, -100), Quaternion.identity);
+
     }
+
+
+    private void OnEnable()
+    {
+        onButtonClicked += SetTurretToBuildManager;
+    }
+
+    private void OnDisable()
+    {
+        onButtonClicked -= SetTurretToBuildManager;
+    }
+
 
     private void Start()
     {
@@ -36,6 +69,24 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler
 
         myImage.color = turretsLayout.turretNodeFlyWeight.unselectedColor;
 
+        myButton.onClick.AddListener(onButtonClicked);
+
+
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        turretsLayout.SelectNode(this);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        statsPanel.OpenBehavior();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        statsPanel.CloseBehavior();
     }
 
     private void CheckForError()
@@ -45,6 +96,10 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler
             gameObject.SetActive(false);
             Debug.LogError("[UITurretNode] Not in layout list");
         }
+    }
+    private void SetTurretToBuildManager()
+    {
+        buildManager.TurretToBuild = turretPrefab.gameObject;
     }
 
     private void ToogleSelectedColor()
@@ -59,9 +114,5 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        turretsLayout.SelectNode(this);
-    }
 }
 

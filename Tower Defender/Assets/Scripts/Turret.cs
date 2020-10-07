@@ -2,22 +2,27 @@
 
 public class Turret : MonoBehaviour
 {
+
+    public float ShootRangeDistance { get => _shootRangeDistance; set => _shootRangeDistance = value; }
+    public float RotationSpeed { get => _rotationSpeed; set => _rotationSpeed = value; }
+    public float ChangeTargetDistanceOffset { get => _changeTargetDistanceOffset; private set { } }
+    public float TurretDamage { get => CalculateTurretDamage(); private set { } }
+    public float TurretFireRate { get => CalculateTurretFireRate(); private set { } }
     public IEnemy targetEnemy { get; private set; }
+
+    [SerializeField] private float _shootRangeDistance = 10f;
+    [SerializeField] private float _rotationSpeed = 8f;
+    [SerializeField] private float _changeTargetDistanceOffset = 0.3f;
 
     public Transform bottomOfTurret = null;
 
     private const int angleToLock = 20;
-    [SerializeField] private float changeTargetDistanceOffset = 0.3f;
 
     private bool targetInRange = false;
     private bool aimLockedAtEnemy = false;
-
-    [SerializeField] private float shootRangeDistance = 10f;
-
-    [SerializeField] private float rotationSpeed = 8f;
     private Quaternion initialRotation;
 
-    private Gun[] gunsArray;
+    public Gun[] gunsArray;
     [SerializeField] private Transform partToRotate = null;
 
     void Awake()
@@ -58,6 +63,8 @@ public class Turret : MonoBehaviour
         return partToRotate.rotation;
     }
 
+
+
     private void SetGunsShootPermission() 
     {
 
@@ -80,7 +87,7 @@ public class Turret : MonoBehaviour
         float newEnemyDistance = Vector3.Distance(transform.position, possibleNewEnemy.Transform.position);
         float currentDistance = (targetEnemy == null || targetEnemy.GameObject.activeSelf == false) ? Mathf.Infinity : Vector3.Distance(transform.position, targetEnemy.Transform.position);
 
-        if (newEnemyDistance + changeTargetDistanceOffset < currentDistance)
+        if (newEnemyDistance + ChangeTargetDistanceOffset < currentDistance)
         {
             targetEnemy = possibleNewEnemy;
         }
@@ -88,7 +95,7 @@ public class Turret : MonoBehaviour
 
     private void CheckIfTargetInRange()
     {
-        targetInRange = (targetEnemy.GameObject.activeSelf && Vector3.Distance(transform.position, targetEnemy.Transform.position) < shootRangeDistance);
+        targetInRange = (targetEnemy.GameObject.activeSelf && Vector3.Distance(transform.position, targetEnemy.Transform.position) < ShootRangeDistance);
     }
 
     private void UpdateRotation()
@@ -103,7 +110,7 @@ public class Turret : MonoBehaviour
             partToRotate.rotation = lookRotation;
         }
 
-        Vector3 rotationInEuler = Quaternion.Lerp(partToRotate.rotation, lookRotation, rotationSpeed * Time.deltaTime).eulerAngles;
+        Vector3 rotationInEuler = Quaternion.Lerp(partToRotate.rotation, lookRotation, RotationSpeed * Time.deltaTime).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0, rotationInEuler.y, 0);
     }
 
@@ -112,8 +119,8 @@ public class Turret : MonoBehaviour
         aimLockedAtEnemy = false;
         RaycastHit hit;
 
-        //Debug.DrawRay(partToRotate.position, partToRotate.forward * shootRangeDistance, Color.red);
-        if (Physics.Raycast(partToRotate.position, partToRotate.forward, out hit, shootRangeDistance))
+        //Debug.DrawRay(partToRotate.position, partToRotate.forward * turretInfo.shootRangeDistance, Color.red);
+        if (Physics.Raycast(partToRotate.position, partToRotate.forward, out hit, ShootRangeDistance))
         {
 
             if (hit.collider.GetComponentInParent<IEnemy>() != null)
@@ -126,8 +133,31 @@ public class Turret : MonoBehaviour
     private void OnDrawGizmos()
     {
 
-        UnityEditor.Handles.DrawWireDisc(partToRotate.transform.position, transform.up, shootRangeDistance);
+        UnityEditor.Handles.DrawWireDisc(partToRotate.transform.position, transform.up, ShootRangeDistance);
 
     }
+
+    private float CalculateTurretDamage()
+    {
+        float totalDamage = 0;
+        foreach (Gun gun in gunsArray)
+        {
+            totalDamage += gun.GunDamage;
+        }
+
+        return totalDamage;
+    }
+
+    private float CalculateTurretFireRate()
+    {
+        float fireRate = 0;
+        foreach (Gun gun in gunsArray)
+        {
+            fireRate += gun.FireRate;
+        }
+
+        return fireRate / gunsArray.Length;
+    }
+
 
 }

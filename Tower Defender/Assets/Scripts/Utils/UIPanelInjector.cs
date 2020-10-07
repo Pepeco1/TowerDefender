@@ -27,7 +27,7 @@ public class UIPanelInjector : MonoBehaviour
             return;
         }
 
-        canvas.transform.parent = uiManager.transform;
+        canvas.transform.SetParent(uiManager.transform);
     }
 
     private void OnDestroy()
