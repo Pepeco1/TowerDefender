@@ -8,8 +8,14 @@ public class Gun : MonoBehaviour, IGun
 
     public float NextShotTime { get; set; }
     public bool CanShoot { get; set; }
-    public float GunDamage { get => _gunInfo.GunDamage; private set { } }
-    public GunInfo GunInfo { get => _gunInfo; set { } }
+    public float ShootingDelay { get => _shootingDelay; set => _shootingDelay = value; }
+    public float FireRate { get => 1 / _shootingDelay; set { } }
+    public float GunDamage { get => _shotDamage; private set { } }
+    public float BulletSpeed { get => bulletSpeed; private set { } }
+
+    [SerializeField] private float _shotDamage = 10f;
+    [SerializeField] private float _shootingDelay = 1f;
+    [SerializeField] private float bulletSpeed = 10f;
 
     [SerializeField]
     private Transform gunTip = null;
@@ -44,10 +50,10 @@ public class Gun : MonoBehaviour, IGun
             bullet.transform.position = gunTip.position;
             bullet.transform.rotation = myTurret.GetLookinDir();
             bullet.targetToFollow = myTurret.targetEnemy;
-            bullet.TotalDamage = _gunInfo.GunDamage;
-            bullet.speed = _gunInfo.BulletSpeed;
+            bullet.TotalDamage = GunDamage;
+            bullet.speed = BulletSpeed;
 
-            NextShotTime = Time.time + _gunInfo.ShootingDelay;
+            NextShotTime = Time.time + ShootingDelay;
 
         }
 

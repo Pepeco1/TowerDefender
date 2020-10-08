@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIDamageTurretStat : UIAbstractTurretStats
+public class UIFireRateTurretStat : UIAbstractTurretStats
 {
     public override string GetTextWithStats()
     {
-        return initialString + " " + turretNode.TurretPrefab.TurretDamage;
+        return initialString + " " + turretNode.TurretPrefab.TurretFireRate;
     }
 
 }

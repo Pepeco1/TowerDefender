@@ -21,17 +21,18 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler, IPointerEnterHandl
         }
     }
 
-    public TurretInfo LinkedTurret { get => _myTurretInfos; private set { } }
+    public Turret TurretPrefab { get => turretPrefab; set { } }
+
 
     private bool _isSelected = false;
 
-    [SerializeField] private TurretInfo _myTurretInfos;
 
     private Image myImage = null;
     private Button myButton = null;
     private UITurretsLayout turretsLayout = null;
     private BuildManager buildManager = null;
     private UIStatsHolder statsPanel = null;
+    [SerializeField] Turret turretPrefab = null;
 
     private UnityAction onButtonClicked = null;
 
@@ -42,6 +43,9 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler, IPointerEnterHandl
         turretsLayout = GetComponentInParent<UITurretsLayout>();
         buildManager = BuildManager.Instance;
         statsPanel = GetComponentInChildren<UIStatsHolder>(true);
+
+        turretPrefab = Instantiate(turretPrefab, new Vector3(-100, -100, -100), Quaternion.identity);
+        //turretPrefab.gameObject.SetActive(false);
 
         myButton.onClick.AddListener(onButtonClicked);
     }
@@ -90,7 +94,7 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler, IPointerEnterHandl
     }
     private void SetTurretToBuildManager()
     {
-        buildManager.TurretToBuild = _myTurretInfos.TurretPrefab.gameObject;
+        buildManager.TurretToBuild = turretPrefab.gameObject;
     }
 
     private void ToogleSelectedColor()
