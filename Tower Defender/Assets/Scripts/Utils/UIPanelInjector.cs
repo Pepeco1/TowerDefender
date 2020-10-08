@@ -5,13 +5,19 @@ using UnityEngine;
 public class UIPanelInjector : MonoBehaviour
 {
 
-    [SerializeField] private List<BaseUIPanel> scenePanels;
-
+    [SerializeField] private List<BaseUIPanel> scenePanels = null;
+    [SerializeField] private UIManager uiManagerPrefab = null;
     private UIManager uiManager = null;
 
     private void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
+
+        if(uiManager == null)
+        {
+            uiManager = Instantiate(uiManagerPrefab);
+        }
+
         uiManager.InjectPanels(scenePanels);
 
         AttachCanvasToUIManager();
@@ -19,7 +25,7 @@ public class UIPanelInjector : MonoBehaviour
 
     private void AttachCanvasToUIManager()
     {
-        Canvas canvas = GetComponentInChildren<Canvas>();
+        Canvas canvas = GetComponent<Canvas>();
 
         if (canvas == null)
         {

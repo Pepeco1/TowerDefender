@@ -22,6 +22,7 @@ public class UIManager : Singleton<UIManager>
 
     private void OnEnable()
     {
+
         SubscribeToLoadingScreen();
 
     }
@@ -29,7 +30,9 @@ public class UIManager : Singleton<UIManager>
 
     private void OnDisable()
     {
+
         UnsubscribeToLoadingScreen();
+
     }
 
 
@@ -157,12 +160,13 @@ public class UIManager : Singleton<UIManager>
         ClosePanel(loadingScreen);
         onLoadingScreenClose?.Invoke();
     }
+
     private void UnsubscribeToLoadingScreen()
     {
         if (loadingScreen != null)
             loadingScreen.onLoadingComplete -= loadingScreen_OnLoadingComplete;
         else
-            Debug.LogWarning("[UIManager] Loading screen is Null");
+            LogLoadingScreenWarning();
     }
 
     private void SubscribeToLoadingScreen()
@@ -170,7 +174,16 @@ public class UIManager : Singleton<UIManager>
         if (loadingScreen != null)
             loadingScreen.onLoadingComplete += loadingScreen_OnLoadingComplete;
         else
-            Debug.LogWarning("[UIManager] Loading screen is Null");
+            LogLoadingScreenWarning();
     }
 
+    private static void LogLoadingScreenWarning()
+    {
+        Debug.LogWarning("[UIManager] Loading screen is Null");
+    }
+
+    private bool HasOnlyOneInstance()
+    {
+        return FindObjectsOfType<UIManager>().Length <= 1;
+    }
 }

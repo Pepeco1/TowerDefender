@@ -116,6 +116,8 @@ MonoBehaviour:
   scenePanels:
   - {fileID: 7152503393596093156}
   - {fileID: 6192057907802204829}
+  uiManagerPrefab: {fileID: 2762763313483293957, guid: 69e23e87909894c469ede2e39bbbab98,
+    type: 3}
 --- !u!1 &6192057907207217559
 GameObject:
   m_ObjectHideFlags: 0
