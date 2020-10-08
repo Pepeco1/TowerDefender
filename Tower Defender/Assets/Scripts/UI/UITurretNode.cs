@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using System;
+using System.Collections;
 
 public class UITurretNode : BaseUIPanel, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -22,6 +23,7 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler, IPointerEnterHandl
     }
 
     public Turret TurretPrefab { get => turretPrefab; set { } }
+    public Turret InstantiatedTurret { get => instantiatedTurret; private set { } }
 
 
     private bool _isSelected = false;
@@ -33,10 +35,11 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler, IPointerEnterHandl
     private BuildManager buildManager = null;
     private UIStatsHolder statsPanel = null;
     [SerializeField] Turret turretPrefab = null;
+    Turret instantiatedTurret = null;
 
     private UnityAction onButtonClicked = null;
 
-    private void Awake()
+    protected void Awake()
     {
         myButton = GetComponent<Button>();
         myImage = GetComponent<Image>();
@@ -44,11 +47,10 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler, IPointerEnterHandl
         buildManager = BuildManager.Instance;
         statsPanel = GetComponentInChildren<UIStatsHolder>(true);
 
-        turretPrefab = Instantiate(turretPrefab, new Vector3(-100, -100, -100), Quaternion.identity);
-        //turretPrefab.gameObject.SetActive(false);
+        instantiatedTurret = Instantiate(turretPrefab, new Vector3(-100, -100, -100), Quaternion.identity);
 
-        myButton.onClick.AddListener(onButtonClicked);
     }
+
 
     private void OnEnable()
     {
@@ -66,6 +68,9 @@ public class UITurretNode : BaseUIPanel, IPointerDownHandler, IPointerEnterHandl
         CheckForError();
 
         myImage.color = turretsLayout.turretNodeFlyWeight.unselectedColor;
+
+        myButton.onClick.AddListener(onButtonClicked);
+
 
     }
 

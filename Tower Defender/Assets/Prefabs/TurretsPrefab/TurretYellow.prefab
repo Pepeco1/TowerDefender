@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 482006242667021993, guid: 39bab003439541248a7987cf08c3ed46,
+        type: 3}
+      propertyPath: _shootingDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 482006242667021993, guid: 39bab003439541248a7987cf08c3ed46,
+        type: 3}
+      propertyPath: _shotDamage
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1777559669198312881, guid: 39bab003439541248a7987cf08c3ed46,
         type: 3}
       propertyPath: m_LocalPosition.x
