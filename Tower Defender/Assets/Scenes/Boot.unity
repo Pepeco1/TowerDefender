@@ -336,7 +336,7 @@ PrefabInstance:
     - target: {fileID: 4542999075285930639, guid: 5d32c1b9961cd224092aef219c421c05,
         type: 3}
       propertyPath: firstScene
-      value: SampleScene
+      value: MainMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d32c1b9961cd224092aef219c421c05, type: 3}
@@ -364,9 +364,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3241497658392773620, guid: 69e23e87909894c469ede2e39bbbab98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5076003868682776356, guid: 69e23e87909894c469ede2e39bbbab98,
         type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289842311137666990, guid: 69e23e87909894c469ede2e39bbbab98,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5289842311137666991, guid: 69e23e87909894c469ede2e39bbbab98,
@@ -387,7 +397,7 @@ PrefabInstance:
     - target: {fileID: 7361805411508343990, guid: 69e23e87909894c469ede2e39bbbab98,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7361805411508343990, guid: 69e23e87909894c469ede2e39bbbab98,
         type: 3}

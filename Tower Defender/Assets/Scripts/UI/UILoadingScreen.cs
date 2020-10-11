@@ -57,6 +57,7 @@ public class UILoadingScreen : BaseUIPanel
     {
         _loadingSceneOperation = null;
         onLoadingComplete?.Invoke();
+        base.CloseBehavior();
     }
 
     public override void OpenBehavior()
@@ -69,7 +70,7 @@ public class UILoadingScreen : BaseUIPanel
 
         yield return new WaitForSecondsRealtime(closeDelayInSeconds);
 
-        CloseBehavior();
+        Close();
 
     }
     private bool IsLoadingFinished()

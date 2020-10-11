@@ -8,7 +8,6 @@ public class BaseUIPanel : MonoBehaviour {
     public bool isOpen = false;
     public PanelType panelType = default;
 
-
     public virtual void OpenBehavior()
     {
         if (!isOpen)
@@ -30,5 +29,10 @@ public class BaseUIPanel : MonoBehaviour {
             isOpen = false;
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnEnable()
+    {
+        isOpen = gameObject.activeSelf;
     }
 }
