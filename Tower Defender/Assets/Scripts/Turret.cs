@@ -22,13 +22,13 @@ public class Turret : MonoBehaviour
     private bool aimLockedAtEnemy = false;
     private Quaternion initialRotation;
 
-    public Gun[] gunsArray;
+    public GunProjectile[] gunsArray;
     [SerializeField] private Transform partToRotate = null;
 
     void Awake()
     {
 
-        gunsArray = GetComponentsInChildren<Gun>();
+        gunsArray = GetComponentsInChildren<GunProjectile>();
         initialRotation = transform.rotation;
 
     }
@@ -70,7 +70,7 @@ public class Turret : MonoBehaviour
 
         bool gunPermission = aimLockedAtEnemy ? true : false;
 
-        foreach(Gun gun in gunsArray)
+        foreach(GunProjectile gun in gunsArray)
         {
             gun.CanShoot = gunPermission;
         }
@@ -140,7 +140,7 @@ public class Turret : MonoBehaviour
     private float CalculateTurretDamage()
     {
         float totalDamage = 0;
-        foreach (Gun gun in gunsArray)
+        foreach (GunProjectile gun in gunsArray)
         {
             totalDamage += gun.GunDamage;
         }
@@ -151,7 +151,7 @@ public class Turret : MonoBehaviour
     private float CalculateTurretFireRate()
     {
         float fireRate = 0;
-        foreach (Gun gun in gunsArray)
+        foreach (GunProjectile gun in gunsArray)
         {
             fireRate += gun.FireRate;
         }
