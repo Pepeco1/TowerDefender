@@ -11,7 +11,8 @@ public class GunProjectile : Gun, IGun
     public float FireRate { get => 1 / _shootingDelay; set { } }
     public float BulletSpeed { get => bulletSpeed; private set { } }
 
-    [SerializeField] private ShotDamageProjectile shotDamage = null;
+    public override float GunDamage { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
     [SerializeField] private float _shootingDelay = 1f;
     [SerializeField] private float bulletSpeed = 10f;
 
@@ -24,7 +25,7 @@ public class GunProjectile : Gun, IGun
     public override void Shoot()
     {
 
-        if (NextShotTime <= Time.time && myTurret.targetEnemy != null)
+        if (NextShotTime <= Time.time && HasTargetEnemy())
         {
 
             Bullet bullet = BulletPool.Instance.GetObject();

@@ -6,17 +6,12 @@ public abstract class Gun : MonoBehaviour
 {
 
     public bool CanShoot { get; set; }
-    public float GunDamage { get => _shotDamage; private set { } }
-
+    public abstract float GunDamage { get; set; }
 
     [SerializeField] private float _shotDamage = 10f;
     [SerializeField] protected float bulletDamageMultiplier = 1f;
 
-    [SerializeField]
-    protected Transform gunTip = null;
-
-    [SerializeField] private GunInfo _gunInfo = null;
-
+    [SerializeField] protected Transform gunTip = null;
     protected Turret myTurret = null;
 
     protected virtual void Awake()
@@ -33,6 +28,11 @@ public abstract class Gun : MonoBehaviour
 
 
     public abstract void Shoot();
+
+    protected bool HasTargetEnemy()
+    {
+        return myTurret.targetEnemy != null;
+    }
 
 
 

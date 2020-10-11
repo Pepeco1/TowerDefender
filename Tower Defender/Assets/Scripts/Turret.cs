@@ -22,13 +22,13 @@ public class Turret : MonoBehaviour
     private bool aimLockedAtEnemy = false;
     private Quaternion initialRotation;
 
-    public GunProjectile[] gunsArray;
+    public Gun[] gunsArray;
     [SerializeField] private Transform partToRotate = null;
 
     void Awake()
     {
 
-        gunsArray = GetComponentsInChildren<GunProjectile>();
+        gunsArray = GetComponentsInChildren<Gun>();
         initialRotation = transform.rotation;
 
     }
@@ -70,7 +70,7 @@ public class Turret : MonoBehaviour
 
         bool gunPermission = aimLockedAtEnemy ? true : false;
 
-        foreach(GunProjectile gun in gunsArray)
+        foreach(Gun gun in gunsArray)
         {
             gun.CanShoot = gunPermission;
         }
