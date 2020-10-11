@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 1218743666}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -254,8 +254,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &1218743666 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 5978164535266322412, guid: 92dcab182755a434ea982c99d34478d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 269187542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1804817136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -422,7 +428,7 @@ PrefabInstance:
     - target: {fileID: 7361805411508343990, guid: 69e23e87909894c469ede2e39bbbab98,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7361805411508343990, guid: 69e23e87909894c469ede2e39bbbab98,
         type: 3}

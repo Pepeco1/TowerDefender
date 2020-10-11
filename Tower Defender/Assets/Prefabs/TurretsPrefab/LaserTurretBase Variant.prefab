@@ -107,6 +107,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserTurretBase Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5610960392302942386, guid: f2e4104391442df488ad698d27b2a587,
+        type: 3}
+      propertyPath: _shotDamage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7610898578642575954, guid: f2e4104391442df488ad698d27b2a587,
         type: 3}
       propertyPath: _shootRangeDistance
