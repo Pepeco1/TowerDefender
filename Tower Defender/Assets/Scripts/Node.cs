@@ -35,8 +35,8 @@ public class Node : MonoBehaviour
         {
             nodeTurret = BuildManager.Instance.BuildTurret();
 
-            var bottomPositionOfTurret = nodeTurret.GetComponent<Turret>().bottomOfTurret.localPosition;
-            var distanceOfTurretsPositionToItsFeet = Mathf.Abs(nodeTurret.transform.localPosition.y) + Mathf.Abs(bottomPositionOfTurret.y);
+            var bottomPositionOfTurret = nodeTurret.GetComponent<Turret>().bottomOfTurret.position;
+            var distanceOfTurretsPositionToItsFeet = Mathf.Abs(nodeTurret.transform.position.y) + Mathf.Abs(bottomPositionOfTurret.y);
             
             var newTurretPlacement = turretPositionInNode.position + new Vector3(0, distanceOfTurretsPositionToItsFeet, 0);
 
