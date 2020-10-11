@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1526980366}
-  m_IndirectSpecularColor: {r: 0.284712, g: 0.37127686, b: 0.49836743, a: 1}
+  m_IndirectSpecularColor: {r: 0.28471163, g: 0.37127623, b: 0.4983657, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10358,6 +10358,75 @@ PrefabInstance:
       objectReference: {fileID: 4637720910945310380}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e2e55270208fe249b3abd1ac8e831ad, type: 3}
+--- !u!1001 &2606771422059013021
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803029262278200028, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserTurretBase
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 642e07d994cb3464ab288922bdf8655d, type: 3}
 --- !u!4 &2662066774771180672 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7254719799040733739, guid: 521a97e362edfd3419f84574cb555944,

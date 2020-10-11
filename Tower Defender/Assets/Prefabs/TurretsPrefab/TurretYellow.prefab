@@ -88,5 +88,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4c9856fae1ae26a4c853a9022843d26b,
         type: 2}
+    - target: {fileID: 7610898578642575954, guid: 39bab003439541248a7987cf08c3ed46,
+        type: 3}
+      propertyPath: _shootRangeDistance
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39bab003439541248a7987cf08c3ed46, type: 3}

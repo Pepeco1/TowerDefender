@@ -1,63 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public class Gun : MonoBehaviour, IGun
+public abstract class Gun : MonoBehaviour
 {
 
-    public float NextShotTime { get; set; }
     public bool CanShoot { get; set; }
-    public float ShootingDelay { get => _shootingDelay; set => _shootingDelay = value; }
-    public float FireRate { get => 1 / _shootingDelay; set { } }
-    public float GunDamage { get => _shotDamage; private set { } }
-    public float BulletSpeed { get => bulletSpeed; private set { } }
+    public abstract float GunDamage { get; set; }
 
     [SerializeField] private float _shotDamage = 10f;
-    [SerializeField] private float _shootingDelay = 1f;
-    [SerializeField] private float bulletSpeed = 10f;
+    [SerializeField] protected float bulletDamageMultiplier = 1f;
 
-    [SerializeField]
-    private Transform gunTip = null;
-    [SerializeField]
-    private float bulletDamageMultiplier = 1f;
+    [SerializeField] protected Transform gunTip = null;
+    protected Turret myTurret = null;
 
-    [SerializeField] private GunInfo _gunInfo= null;
-
-    private Turret myTurret = null;
-
-    private void Awake()
+    protected virtual void Awake()
     {
         myTurret = GetComponentInParent<Turret>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        if(CanShoot)
+        if (CanShoot)
             Shoot();
     }
 
 
-    public void Shoot()
+    public abstract void Shoot();
+
+    protected bool HasTargetEnemy()
     {
-
-        if (NextShotTime <= Time.time && myTurret.targetEnemy != null)
-        {
-
-            Bullet bullet = BulletPool.Instance.GetObject();
-            bullet.gameObject.SetActive(true);
-            bullet.transform.position = gunTip.position;
-            bullet.transform.rotation = myTurret.GetLookinDir();
-            bullet.targetToFollow = myTurret.targetEnemy;
-            bullet.TotalDamage = GunDamage;
-            bullet.speed = BulletSpeed;
-
-            NextShotTime = Time.time + ShootingDelay;
-
-        }
-
+        return myTurret.targetEnemy != null;
     }
+
 
 
 }
