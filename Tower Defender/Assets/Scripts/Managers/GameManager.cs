@@ -42,8 +42,7 @@ public class GameManager : Singleton<GameManager>
 
         if(firstScene != string.Empty)
         {
-            var ao = LoadScenePausingGame(firstScene);
-            UIManager.Instance.LoadingScreen(ao);
+            LoadSceneWithLoadingScreen(firstScene);
         }
 
     }
@@ -80,16 +79,18 @@ public class GameManager : Singleton<GameManager>
         return ao;
     }
 
-    public AsyncOperation LoadScenePausingGame(string sceneName)
-    {
-        GamePaused = true;
-        return LoadScene(sceneName);
-    }
 
     public AsyncOperation LoadSceneOnBackground(string sceneName)
     {
         return LoadScene(sceneName);
     }
+
+    public void LoadSceneWithLoadingScreen(string sceneName)
+    {
+        var ao = LoadScenePausingGame(sceneName);
+        UIManager.Instance.LoadingScreen(ao);
+    }
+
 
     public void UnloadScene(string sceneName)
     {
@@ -104,6 +105,11 @@ public class GameManager : Singleton<GameManager>
         {
             Debug.LogError("[GameManager] Unable to unload scene " + sceneName);
         }
+    }
+    private AsyncOperation LoadScenePausingGame(string sceneName)
+    {
+        GamePaused = true;
+        return LoadScene(sceneName);
     }
 
     private void UIManager_OnLoadingScreenClose()
