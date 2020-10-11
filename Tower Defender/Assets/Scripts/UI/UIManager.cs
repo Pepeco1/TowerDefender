@@ -158,6 +158,7 @@ public class UIManager : Singleton<UIManager>
 
     { 
         ClosePanel(loadingScreen);
+        GameManager.Instance.GamePaused = false;
         onLoadingScreenClose?.Invoke();
     }
 
