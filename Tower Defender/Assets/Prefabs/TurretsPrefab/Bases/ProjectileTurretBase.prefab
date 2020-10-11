@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 8352525321799224872}
   - component: {fileID: 7610898578642575954}
   m_Layer: 0
-  m_Name: TurretBase
+  m_Name: ProjectileTurretBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,10 +219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c200f109559529d48bb75cd8ee00fd67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shootRangeDistance: 10
+  _rotationSpeed: 8
+  _changeTargetDistanceOffset: 0.3
   bottomOfTurret: {fileID: 368925415413596343}
-  changeTargetDistanceOffset: 0.3
-  shootRangeDistance: 6
-  rotationSpeed: 7
+  gunsArray: []
   partToRotate: {fileID: 3695743514908085161}
 --- !u!1001 &5280754509790836294
 PrefabInstance:

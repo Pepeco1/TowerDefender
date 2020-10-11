@@ -24,14 +24,25 @@ public class GunLaser : Gun
     {
 
         if (!HasTargetEnemy())
+        {
+            ClearLineRenderer();
             return;
+        }
 
         UpdateLineRenderer();
         base.Update();
     }
 
+    private void ClearLineRenderer()
+    {
+        lineRenderer.enabled = false;
+    }
+
     private void UpdateLineRenderer()
     {
+        if (lineRenderer.enabled == false)
+            lineRenderer.enabled = true;
+
         lineRenderer.SetPosition(0, gunTip.position);
         lineRenderer.SetPosition(1, myTurret.targetEnemy.Transform.position);
     }

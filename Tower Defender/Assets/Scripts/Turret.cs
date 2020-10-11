@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private float _shootRangeDistance = 10f;
     [SerializeField] private float _rotationSpeed = 8f;
     [SerializeField] private float _changeTargetDistanceOffset = 0.3f;
+
 
     public Transform bottomOfTurret = null;
 
@@ -35,26 +37,20 @@ public class Turret : MonoBehaviour
 
     private void Start()
     {
-
-        InvokeRepeating("UpdateTargetEnemy", 0f, 0.1f);
-
         SetGunsShootPermission();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-        if (targetEnemy == null)
-            return;
-
-
         CheckIfTargetInRange();
+
+        if (!targetInRange)
+            UpdateTargetEnemy();
+
         UpdateRotation();
         CheckAimLockedAtEnemy();
         SetGunsShootPermission();
-
 
     }
 
@@ -79,30 +75,39 @@ public class Turret : MonoBehaviour
 
     private void UpdateTargetEnemy()
     {
-        IEnemy possibleNewEnemy = EnemyManager.Instance.GetClosestEnemy(transform.position);
 
+        if (targetInRange)
+            return;
+
+        targetEnemy = null;
+
+        IEnemy possibleNewEnemy = EnemyManager.Instance.GetClosestEnemy(transform.position);
         if (possibleNewEnemy == null)
             return;
 
-        float newEnemyDistance = Vector3.Distance(transform.position, possibleNewEnemy.Transform.position);
-        float currentDistance = (targetEnemy == null || targetEnemy.GameObject.activeSelf == false) ? Mathf.Infinity : Vector3.Distance(transform.position, targetEnemy.Transform.position);
-
-        if (newEnemyDistance + ChangeTargetDistanceOffset < currentDistance)
-        {
+        float distanceToNewEnemy = Vector3.Distance(transform.position, possibleNewEnemy.Transform.position);
+        //float distanceToCurrentEnemy = (targetEnemy == null || targetEnemy.GameObject.activeSelf == false) ? Mathf.Infinity : Vector3.Distance(transform.position, targetEnemy.Transform.position);
+        //if (distanceToNewEnemy + ChangeTargetDistanceOffset < distanceToCurrentEnemy)
+        
+        if(distanceToNewEnemy < ShootRangeDistance)
             targetEnemy = possibleNewEnemy;
-        }
+        
     }
+
 
     private void CheckIfTargetInRange()
     {
-        targetInRange = (targetEnemy.GameObject.activeSelf && Vector3.Distance(transform.position, targetEnemy.Transform.position) < ShootRangeDistance);
+        targetInRange = ((targetEnemy != null) && (targetEnemy.GameObject.activeSelf) && Vector3.Distance(transform.position, targetEnemy.Transform.position) < ShootRangeDistance);
     }
 
     private void UpdateRotation()
     {
 
+        if (!targetInRange)
+            return;
+
         Vector3 dir = targetEnemy.Transform.position - transform.position;
-        Quaternion lookRotation = targetInRange ? Quaternion.LookRotation(dir) : initialRotation;
+        Quaternion lookRotation = Quaternion.LookRotation(dir);
 
         // if the angle difference is small, snap to the target
         if(Quaternion.Angle(lookRotation, partToRotate.rotation) < angleToLock)
