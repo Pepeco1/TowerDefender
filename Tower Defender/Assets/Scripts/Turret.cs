@@ -10,6 +10,7 @@ public class Turret : MonoBehaviour
     public float TurretDamage { get => CalculateTurretDamage(); private set { } }
     public float TurretFireRate { get => CalculateTurretFireRate(); private set { } }
     public IEnemy targetEnemy { get; private set; }
+    public bool AimLockedAtEnemy { get => aimLockedAtEnemy; private set { } }
 
     [SerializeField] private float _shootRangeDistance = 10f;
     [SerializeField] private float _rotationSpeed = 8f;
@@ -80,6 +81,7 @@ public class Turret : MonoBehaviour
             return;
 
         targetEnemy = null;
+        aimLockedAtEnemy = false;
 
         IEnemy possibleNewEnemy = EnemyManager.Instance.GetClosestEnemy(transform.position);
         if (possibleNewEnemy == null)
@@ -125,14 +127,19 @@ public class Turret : MonoBehaviour
         RaycastHit hit;
 
         //Debug.DrawRay(partToRotate.position, partToRotate.forward * turretInfo.shootRangeDistance, Color.red);
-        if (Physics.Raycast(partToRotate.position, partToRotate.forward, out hit, ShootRangeDistance))
+        if (CheckForHit(out hit))
         {
-
-            if (hit.collider.GetComponentInParent<IEnemy>() != null)
+            IEnemy enemy = hit.collider.GetComponentInParent<IEnemy>();
+            if (enemy != null && enemy.Equals(targetEnemy))
             {
                 aimLockedAtEnemy = true;
             }
         }
+    }
+
+    public bool CheckForHit(out RaycastHit hit)
+    {
+        return Physics.Raycast(partToRotate.position, partToRotate.forward, out hit, ShootRangeDistance);
     }
 
     private void OnDrawGizmos()

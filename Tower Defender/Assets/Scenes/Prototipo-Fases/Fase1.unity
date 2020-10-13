@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1526980366}
-  m_IndirectSpecularColor: {r: 0.28471163, g: 0.37127623, b: 0.4983657, a: 1}
+  m_IndirectSpecularColor: {r: 0.284712, g: 0.37127686, b: 0.49836743, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2831,7 +2831,7 @@ Transform:
   - {fileID: 1817552159}
   - {fileID: 1192492868}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &510051244 stripped
 Transform:
@@ -6681,7 +6681,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1300551540
 PrefabInstance:
@@ -10191,7 +10191,7 @@ PrefabInstance:
     - target: {fileID: 1816979154733785539, guid: 05479fc06ab41914181dc2d0b37e3a1e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1816979154733785539, guid: 05479fc06ab41914181dc2d0b37e3a1e,
         type: 3}
@@ -10375,6 +10375,47 @@ PrefabInstance:
       propertyPath: shotDamage.maxDamage
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1836483672465543592, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: laserParticle
+      value: 
+      objectReference: {fileID: 1060028031322264160, guid: 52e8a8e8ec571b3469e666b39c857c89,
+        type: 3}
+    - target: {fileID: 4969932935043626373, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969932935043626373, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.9988213
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969932935043626373, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.19366026
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969932935043626373, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969932935043626373, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key2.g
+      value: 0.17671019
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969932935043626373, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime1
+      value: 31997
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969932935043626373, guid: 642e07d994cb3464ab288922bdf8655d,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.m_NumColorKeys
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10413,7 +10454,7 @@ PrefabInstance:
     - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5479063862680329387, guid: 642e07d994cb3464ab288922bdf8655d,
         type: 3}

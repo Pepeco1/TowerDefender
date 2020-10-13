@@ -7,6 +7,7 @@ public abstract class Gun : MonoBehaviour
 
     public bool CanShoot { get; set; }
     public abstract float GunDamage { get; set; }
+    protected bool AimLockedAtEnemy { get => myTurret.AimLockedAtEnemy; private set { } }
 
     [SerializeField] private float _shotDamage = 10f;
     [SerializeField] protected float bulletDamageMultiplier = 1f;
@@ -33,6 +34,7 @@ public abstract class Gun : MonoBehaviour
     {
         return myTurret.targetEnemy != null;
     }
+
 
 
 
