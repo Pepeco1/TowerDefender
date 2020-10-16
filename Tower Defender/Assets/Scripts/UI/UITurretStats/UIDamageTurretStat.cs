@@ -6,7 +6,7 @@ public class UIDamageTurretStat : UIAbstractTurretStats
 {
     public override string GetTextWithStats()
     {
-        return initialString + " " + turretNode.InstantiatedTurret.TurretDamage;
+        return initialString + " " + turretNode.InstantiatedTurret.GetDamageStatString();
     }
 
 }

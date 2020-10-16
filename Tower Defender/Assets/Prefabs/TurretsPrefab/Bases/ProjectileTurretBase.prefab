@@ -216,14 +216,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4101459098100286406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c200f109559529d48bb75cd8ee00fd67, type: 3}
+  m_Script: {fileID: 11500000, guid: 3384864b9faf95742a8df2abf423fb4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _shootRangeDistance: 10
   _rotationSpeed: 8
   _changeTargetDistanceOffset: 0.3
   bottomOfTurret: {fileID: 368925415413596343}
-  gunsArray: []
+  gunsArray:
+  - {fileID: 482006242667021993}
   partToRotate: {fileID: 3695743514908085161}
 --- !u!1001 &5280754509790836294
 PrefabInstance:
@@ -306,6 +307,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5280754509790836294}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &482006242667021993 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5762756086242193647, guid: 5d89985ffb9b8dc468a875662f5f80d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 5280754509790836294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc04c2317fe21a24f91890804eb30947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9171347494328753483
 PrefabInstance:
   m_ObjectHideFlags: 0

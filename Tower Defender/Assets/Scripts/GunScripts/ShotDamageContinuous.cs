@@ -17,4 +17,9 @@ public class ShotDamageContinuous : ShotDamageType
         this.maxDamage = maxDamage;
     }
 
+    public override string ToString()
+    {
+        return "Min- " + minDamage + " Max- " + maxDamage;
+    }
+
 }

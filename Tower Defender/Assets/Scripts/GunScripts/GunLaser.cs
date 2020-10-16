@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class GunLaser : Gun
 {
-    // Return string here
-    public override float GunDamage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+    public float MaxDamage { get => maxDamage; private set { } }
+
+    [SerializeField] private float maxDamage = 10f;
     [SerializeField] private float totalChargingTime = 1f;
     private float currentChargingTime = 0f;
     [SerializeField] private LineRenderer lineRenderer = null;
-    [SerializeField] private ShotDamageContinuous shotDamage = null;
     [SerializeField] private ParticleSystem laserParticle = null;
 
     private ParticleSystem.EmissionModule emission;
@@ -21,7 +21,6 @@ public class GunLaser : Gun
         base.Awake();
         lineRenderer.useWorldSpace = true;
 
-        laserParticle = Instantiate(laserParticle);
         emission = laserParticle.emission;
         emission.enabled = false;
     }
@@ -81,7 +80,7 @@ public class GunLaser : Gun
     public override void Shoot()
     {
 
-        myTurret.targetEnemy.Health.TakeDamage(shotDamage.minDamage * Time.deltaTime);
+        myTurret.targetEnemy.Health.TakeDamage(shotDamage * Time.deltaTime);
 
     }
 
