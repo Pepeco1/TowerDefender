@@ -178,7 +178,7 @@ public class UIManager : Singleton<UIManager>
             LogLoadingScreenWarning();
     }
 
-    private static void LogLoadingScreenWarning()
+    private void LogLoadingScreenWarning()
     {
         Debug.LogWarning("[UIManager] Loading screen is Null");
     }

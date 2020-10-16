@@ -20,6 +20,13 @@ public class EnemyManager : Singleton<EnemyManager>
     public void RegisterEnemy(IEnemy enemy)
     {
         enemiesList.Add(enemy);
+        numEnemiesAlive++;
+    }
+
+    public void UnregisterEnemy(IEnemy enemy)
+    {
+        enemiesList.Remove(enemy);
+        numEnemiesAlive--;
     }
 
     public IEnemy GetClosestEnemy(Vector3 targetPoint)
@@ -45,6 +52,11 @@ public class EnemyManager : Singleton<EnemyManager>
 
         return closestEnemy;
 
+    }
+
+    public bool HasEnemiesAlive()
+    {
+        return numEnemiesAlive > 0;
     }
 
 }
