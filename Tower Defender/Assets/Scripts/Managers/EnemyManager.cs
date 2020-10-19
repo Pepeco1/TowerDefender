@@ -47,4 +47,25 @@ public class EnemyManager : Singleton<EnemyManager>
 
     }
 
+    public IEnemy GetFarthestEnemyInRange(Vector3 targetPoint, float range)
+    {
+        IEnemy farthestEnemy = null;
+        float farthestDistance = 0;
+
+        foreach (IEnemy enemy in enemiesList)
+        {
+            if (enemy.GameObject.activeSelf)
+            {
+                float auxDistance = Vector3.Distance(targetPoint, enemy.Transform.position);
+
+                if ((auxDistance <= range) && (farthestDistance < auxDistance))
+                {
+                    farthestDistance = auxDistance;
+                    farthestEnemy = enemy;
+                }
+            }
+        }
+
+        return farthestEnemy;
+    }
 }

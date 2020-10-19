@@ -9,7 +9,7 @@ public class Turret : MonoBehaviour
     public float ChangeTargetDistanceOffset { get => _changeTargetDistanceOffset; private set { } }
     public float TurretDamage { get => CalculateTurretDamage(); private set { } }
     public float TurretFireRate { get => CalculateTurretFireRate(); private set { } }
-    public IEnemy targetEnemy { get; private set; }
+    public IEnemy targetEnemy { get; protected set; }
     public bool AimLockedAtEnemy { get => aimLockedAtEnemy; private set { } }
 
     [SerializeField] private float _shootRangeDistance = 10f;
@@ -21,8 +21,8 @@ public class Turret : MonoBehaviour
 
     private const int angleToLock = 20;
 
-    private bool targetInRange = false;
-    private bool aimLockedAtEnemy = false;
+    protected bool targetInRange = false;
+    protected bool aimLockedAtEnemy = false;
     private Quaternion initialRotation;
 
     public Gun[] gunsArray;
@@ -71,7 +71,6 @@ public class Turret : MonoBehaviour
         return partToRotate.rotation;
     }
 
-
     public bool CheckForHit(out RaycastHit hit)
     {
         return Physics.Raycast(partToRotate.position, partToRotate.forward, out hit, ShootRangeDistance);
@@ -98,7 +97,6 @@ public class Turret : MonoBehaviour
 
 
     }
-
 
     private void CheckIfTargetInRange()
     {
@@ -127,18 +125,28 @@ public class Turret : MonoBehaviour
     private void CheckAimLockedAtEnemy()
     {
         aimLockedAtEnemy = false;
-        RaycastHit hit;
+        RaycastHit[] hits = GetRaycastHits(LayerMask.NameToLayer("Default"));
 
         //Debug.DrawRay(partToRotate.position, partToRotate.forward * turretInfo.shootRangeDistance, Color.red);
-        if (CheckForHit(out hit))
+        if (hits.Length > 0)
         {
-            IEnemy enemy = hit.collider.GetComponentInParent<IEnemy>();
-            if (enemy != null && enemy.Equals(targetEnemy))
+            foreach(var hit in hits)
             {
-                aimLockedAtEnemy = true;
+                IEnemy enemy = hit.collider.GetComponentInParent<IEnemy>();
+
+                if (enemy != null && enemy.Equals(targetEnemy))
+                {
+                    aimLockedAtEnemy = true;
+                }
             }
-        }
+        }  
     }
+
+    private RaycastHit[] GetRaycastHits(int layer = 0)
+    {
+        return Physics.RaycastAll(partToRotate.position, partToRotate.forward, ShootRangeDistance);
+    }
+
 
 
     private float CalculateTurretFireRate()
