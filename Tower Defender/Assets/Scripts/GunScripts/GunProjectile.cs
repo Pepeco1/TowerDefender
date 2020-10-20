@@ -10,8 +10,7 @@ public class GunProjectile : Gun, IGun
     public float ShootingDelay { get => _shootingDelay; set => _shootingDelay = value; }
     public float FireRate { get => 1 / _shootingDelay; set { } }
     public float BulletSpeed { get => bulletSpeed; private set { } }
-
-    public override float GunDamage { get => gunDamage; set => gunDamage = value; }
+    public float GunProjectileDamage { get => gunDamage; protected set { } }
 
     [SerializeField] private float gunDamage = 10f;
     [SerializeField] private float _shootingDelay = 1f;
@@ -36,11 +35,16 @@ public class GunProjectile : Gun, IGun
             bullet.transform.position = gunTip.position;
             bullet.transform.rotation = myTurret.GetLookinDir();
             bullet.targetToFollow = myTurret.targetEnemy;
-            bullet.TotalDamage = GunDamage;
+            bullet.TotalDamage = gunDamage;
             bullet.speed = BulletSpeed;
 
         }
 
+    }
+
+    public string GunDamageToString()
+    {
+        return shotDamage.ToString();
     }
 
 }

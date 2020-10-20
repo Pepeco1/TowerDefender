@@ -9,7 +9,8 @@ public class Turret : MonoBehaviour
     public float ChangeTargetDistanceOffset { get => _changeTargetDistanceOffset; private set { } }
     public float TurretDamage { get => CalculateTurretDamage(); private set { } }
     public float TurretFireRate { get => CalculateTurretFireRate(); private set { } }
-    public IEnemy targetEnemy { get; private set; }
+    public IEnemy targetEnemy { get; protected set; }
+    public bool AimLockedAtEnemy { get => aimLockedAtEnemy; private set { } }
 
     [SerializeField] private float _shootRangeDistance = 10f;
     [SerializeField] private float _rotationSpeed = 8f;
@@ -20,13 +21,15 @@ public class Turret : MonoBehaviour
 
     private const int angleToLock = 20;
 
-    private bool targetInRange = false;
-    private bool aimLockedAtEnemy = false;
+    protected bool targetInRange = false;
+    protected bool aimLockedAtEnemy = false;
     private Quaternion initialRotation;
 
     public Gun[] gunsArray;
     [SerializeField] private Transform partToRotate = null;
 
+
+    #region Unity functions
     void Awake()
     {
 
@@ -53,13 +56,34 @@ public class Turret : MonoBehaviour
         SetGunsShootPermission();
 
     }
+    private void OnDrawGizmos()
+    {
 
+        UnityEditor.Handles.DrawWireDisc(partToRotate.transform.position, transform.up, ShootRangeDistance);
+
+    }
+
+    #endregion
+
+    #region Public functions
     public Quaternion GetLookinDir()
     {
         return partToRotate.rotation;
     }
 
+    public bool CheckForHit(out RaycastHit hit)
+    {
+        return Physics.Raycast(partToRotate.position, partToRotate.forward, out hit, ShootRangeDistance);
+    }
 
+    public virtual string GetDamageStatString()
+    {
+        return CalculateTurretDamage().ToString();
+    }
+
+    #endregion
+
+    #region private functions
 
     private void SetGunsShootPermission() 
     {
@@ -71,29 +95,8 @@ public class Turret : MonoBehaviour
             gun.CanShoot = gunPermission;
         }
 
+
     }
-
-    private void UpdateTargetEnemy()
-    {
-
-        if (targetInRange)
-            return;
-
-        targetEnemy = null;
-
-        IEnemy possibleNewEnemy = EnemyManager.Instance.GetClosestEnemy(transform.position);
-        if (possibleNewEnemy == null)
-            return;
-
-        float distanceToNewEnemy = Vector3.Distance(transform.position, possibleNewEnemy.Transform.position);
-        //float distanceToCurrentEnemy = (targetEnemy == null || targetEnemy.GameObject.activeSelf == false) ? Mathf.Infinity : Vector3.Distance(transform.position, targetEnemy.Transform.position);
-        //if (distanceToNewEnemy + ChangeTargetDistanceOffset < distanceToCurrentEnemy)
-        
-        if(distanceToNewEnemy < ShootRangeDistance)
-            targetEnemy = possibleNewEnemy;
-        
-    }
-
 
     private void CheckIfTargetInRange()
     {
@@ -122,36 +125,30 @@ public class Turret : MonoBehaviour
     private void CheckAimLockedAtEnemy()
     {
         aimLockedAtEnemy = false;
-        RaycastHit hit;
+        int hitLayers = 1 << 0; // Default layer
+        RaycastHit[] hits = GetRaycastHits(hitLayers);
 
         //Debug.DrawRay(partToRotate.position, partToRotate.forward * turretInfo.shootRangeDistance, Color.red);
-        if (Physics.Raycast(partToRotate.position, partToRotate.forward, out hit, ShootRangeDistance))
+        if (hits.Length > 0)
         {
-
-            if (hit.collider.GetComponentInParent<IEnemy>() != null)
+            foreach(var hit in hits)
             {
-                aimLockedAtEnemy = true;
+                IEnemy enemy = hit.collider.GetComponentInParent<IEnemy>();
+
+                if (enemy != null && enemy.Equals(targetEnemy))
+                {
+                    aimLockedAtEnemy = true;
+                }
             }
-        }
+        }  
     }
 
-    private void OnDrawGizmos()
+    private RaycastHit[] GetRaycastHits(int hitLayers = 1 << 0)
     {
-
-        UnityEditor.Handles.DrawWireDisc(partToRotate.transform.position, transform.up, ShootRangeDistance);
-
+        return Physics.RaycastAll(partToRotate.position, partToRotate.forward, ShootRangeDistance, hitLayers);
     }
 
-    private float CalculateTurretDamage()
-    {
-        float totalDamage = 0;
-        foreach (GunProjectile gun in gunsArray)
-        {
-            totalDamage += gun.GunDamage;
-        }
 
-        return totalDamage;
-    }
 
     private float CalculateTurretFireRate()
     {
@@ -164,5 +161,43 @@ public class Turret : MonoBehaviour
         return fireRate / gunsArray.Length;
     }
 
+    #endregion
+
+    #region Protected Methods
+
+    protected virtual float CalculateTurretDamage()
+    {
+        float totalDamage = 0;
+        foreach (GunProjectile gun in gunsArray)
+        {
+            totalDamage += gun.GunProjectileDamage;
+        }
+
+        return totalDamage;
+    }
+
+    protected virtual void UpdateTargetEnemy()
+    {
+
+        if (targetInRange)
+            return;
+
+        targetEnemy = null;
+        aimLockedAtEnemy = false;
+
+        IEnemy possibleNewEnemy = EnemyManager.Instance.GetClosestEnemy(transform.position);
+        if (possibleNewEnemy == null)
+            return;
+
+        float distanceToNewEnemy = Vector3.Distance(transform.position, possibleNewEnemy.Transform.position);
+        //float distanceToCurrentEnemy = (targetEnemy == null || targetEnemy.GameObject.activeSelf == false) ? Mathf.Infinity : Vector3.Distance(transform.position, targetEnemy.Transform.position);
+        //if (distanceToNewEnemy + ChangeTargetDistanceOffset < distanceToCurrentEnemy)
+        
+        if(distanceToNewEnemy < ShootRangeDistance)
+            targetEnemy = possibleNewEnemy;
+        
+    }
+
+    #endregion
 
 }

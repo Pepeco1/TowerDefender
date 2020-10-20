@@ -6,13 +6,20 @@ public abstract class Gun : MonoBehaviour
 {
 
     public bool CanShoot { get; set; }
-    public abstract float GunDamage { get; set; }
+    protected bool AimLockedAtEnemy { get => myTurret.AimLockedAtEnemy; private set { } }
+    public float ShotDamage { get => shotDamage; protected set { } }
 
-    [SerializeField] private float _shotDamage = 10f;
+    [SerializeField] protected float shotDamage = 10f;
     [SerializeField] protected float bulletDamageMultiplier = 1f;
+
+
 
     [SerializeField] protected Transform gunTip = null;
     protected Turret myTurret = null;
+
+
+
+    #region Unity's functions
 
     protected virtual void Awake()
     {
@@ -27,12 +34,25 @@ public abstract class Gun : MonoBehaviour
     }
 
 
+    #endregion
+    #region Public functions
+
     public abstract void Shoot();
 
+    #endregion
+    #region Private Functions
+    #endregion
+    #region Protected Functions
+    
     protected bool HasTargetEnemy()
     {
         return myTurret.targetEnemy != null;
     }
+
+    #endregion
+
+
+
 
 
 

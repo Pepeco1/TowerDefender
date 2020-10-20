@@ -6,4 +6,9 @@ using UnityEngine;
 public class ShotDamageProjectile : ShotDamageType
 {
     public float damage = 10f;
+
+    public override string ToString()
+    {
+        return damage.ToString();
+    }
 }
