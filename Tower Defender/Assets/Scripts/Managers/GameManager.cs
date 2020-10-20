@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
@@ -16,6 +17,8 @@ public class GameManager : Singleton<GameManager>
             Time.timeScale = _gamePaused ? 0 : 1;
         }
     }
+
+    [SerializeField] public UnityEvent onLevelEnded = null;
 
     private bool _gamePaused;
 
@@ -38,13 +41,17 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (FinishedSpawningEnemies && enemyManager.HasEnemiesAlive())
+        if (FinishedSpawningEnemies && !enemyManager.HasEnemiesAlive())
         {
 
-            Debug.Log("[GameManager] TODO- Load next game level");
+            FinishedSpawningEnemies = false;
 
+            StartCoroutine(TerminateLevel());
+
+            
         }
     }
+
     private void OnEnable()
     {
         RegisterForEvents();
@@ -101,13 +108,26 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Private Functions
-    #endregion
+
+    private IEnumerator TerminateLevel()
+    {
+
+        yield return new WaitForSeconds(3f);
+
+        Debug.Log("[GameManager] TODO- Load next game level");
+        UnloadScene(SceneManager.GetActiveScene().name);
+        onLevelEnded?.Invoke();
+
+    }
+
     private void OnLoadSceneComplete(AsyncOperation ao)
     {
         if (_loadingOperations.Contains(ao))
         {
             _loadingOperations.Remove(ao);
         }
+
+        ao.completed -= OnLoadSceneComplete;
     }
 
     private void OnUnloadSceneComplete(AsyncOperation ao)
@@ -117,12 +137,14 @@ public class GameManager : Singleton<GameManager>
 
     private AsyncOperation LoadScene(string sceneName)
     {
+        int Index = SceneManager.sceneCount;
         AsyncOperation ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
         if (ao != null)
         {
             _currentScene = sceneName;
             ao.completed += OnLoadSceneComplete;
+            ao.completed += SetActiveScene;
             _loadingOperations.Add(ao);
         }
         else
@@ -131,6 +153,17 @@ public class GameManager : Singleton<GameManager>
         }
 
         return ao;
+
+
+        void SetActiveScene(AsyncOperation asyncOp)
+        {
+            var myScene = SceneManager.GetSceneAt(Index);
+            SceneManager.SetActiveScene(myScene);
+
+            asyncOp.completed -= SetActiveScene;
+        }
+
+
     }
 
     private AsyncOperation LoadScenePausingGame(string sceneName)
@@ -165,5 +198,5 @@ public class GameManager : Singleton<GameManager>
     {
         FinishedSpawningEnemies = true;
     }
-
+    #endregion
 }

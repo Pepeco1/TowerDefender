@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototipo-Fases/Fase1.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
     path: Assets/Scenes/Boot.unity
     guid: d33a8c886c65af04ab72afdab29f615f
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: ff50d894ed3855b4dbe4a5adb781f13e
+  - enabled: 1
+    path: Assets/Scenes/Prototipo-Fases/Fase1.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Prototipo-Fases/Fase2.unity
+    guid: 866bae5dc1ee4274b81f16f007e36e74
   m_configObjects: {}

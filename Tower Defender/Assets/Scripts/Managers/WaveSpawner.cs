@@ -14,7 +14,7 @@ public class WaveSpawner : MonoBehaviour
     private int currentWaveIndex = 0;
 
     [SerializeField] private float timeToNextWave = 3f;
-    private float countDown = 0f;
+    private float countDown = 3f;
 
     private int numRunningSequences = 0;
     [SerializeField] private List<Wave> levelWaves = new List<Wave>();
@@ -56,6 +56,7 @@ public class WaveSpawner : MonoBehaviour
             else
             {
                 OnFinishedSpawnning?.Invoke();
+                gameObject.SetActive(false);
             }
         }
 
@@ -114,14 +115,14 @@ public class WaveSpawner : MonoBehaviour
 
         for(int i = 0; i < sequence.amountOfEnemies; i++)
         {
+            
+            yield return new WaitForSeconds(1 / sequence.spawnRate);
             var enemy = Instantiate(sequence.prefab, spawnTransform.position, spawnTransform.rotation);
-
+            
+            
             var enemyAiController = enemy.GetComponent<EnemyAIController>();
             enemyAiController.SetDestination(endTransform.position);
 
-
-
-            yield return new WaitForSeconds(1 / sequence.spawnRate);
         }
 
         numRunningSequences -= 1;

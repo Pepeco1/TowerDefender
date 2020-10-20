@@ -75,4 +75,9 @@ public class EnemyManager : Singleton<EnemyManager>
 
         return farthestEnemy;
     }
+
+    public bool HasEnemiesAlive()
+    {
+        return numEnemiesAlive > 0;
+    }
 }

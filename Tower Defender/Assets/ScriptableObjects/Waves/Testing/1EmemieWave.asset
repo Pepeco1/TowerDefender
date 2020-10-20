@@ -18,3 +18,8 @@ MonoBehaviour:
     amountOfEnemies: 1
     spawnRate: 1
     joinBehavior: 0
+  - prefab: {fileID: 7038160755257823898, guid: 5cf61c91d21b3824d8ebaea9126d74cd,
+      type: 3}
+    amountOfEnemies: 1
+    spawnRate: 1
+    joinBehavior: 0
