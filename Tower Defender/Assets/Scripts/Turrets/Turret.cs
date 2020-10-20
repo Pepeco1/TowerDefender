@@ -125,7 +125,8 @@ public class Turret : MonoBehaviour
     private void CheckAimLockedAtEnemy()
     {
         aimLockedAtEnemy = false;
-        RaycastHit[] hits = GetRaycastHits(LayerMask.NameToLayer("Default"));
+        int hitLayers = 1 << 0; // Default layer
+        RaycastHit[] hits = GetRaycastHits(hitLayers);
 
         //Debug.DrawRay(partToRotate.position, partToRotate.forward * turretInfo.shootRangeDistance, Color.red);
         if (hits.Length > 0)
@@ -142,9 +143,9 @@ public class Turret : MonoBehaviour
         }  
     }
 
-    private RaycastHit[] GetRaycastHits(int layer = 0)
+    private RaycastHit[] GetRaycastHits(int hitLayers = 1 << 0)
     {
-        return Physics.RaycastAll(partToRotate.position, partToRotate.forward, ShootRangeDistance);
+        return Physics.RaycastAll(partToRotate.position, partToRotate.forward, ShootRangeDistance, hitLayers);
     }
 
 
