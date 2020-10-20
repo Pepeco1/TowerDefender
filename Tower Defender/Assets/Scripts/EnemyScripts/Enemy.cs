@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     private void OnDeath()
     {
+        EnemyManager.Instance.UnregisterEnemy(this);
         GameObject.SetActive(false);
     }
 

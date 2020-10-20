@@ -1,52 +1,92 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WaveSpawner : MonoBehaviour
 {
 
+    //Properties
+    
+    public bool FinishedSpawns => !HasNextWave() && !HasSequenceRunning();
+
     private Wave currentWave;
+    private int currentWaveIndex = 0;
+
     [SerializeField] private float timeToNextWave = 3f;
     private float countDown = 0f;
 
-    [SerializeField] private List<Wave> levelWaves = new List<Wave>();
-    private int currentWaveIndex = 0;
     private int numRunningSequences = 0;
+    [SerializeField] private List<Wave> levelWaves = new List<Wave>();
 
-    [SerializeField]
-    private Transform spawnTransform = null;
-    [SerializeField]
-    private Transform endTransform = null;
+    // Member Variables
+    [SerializeField] private Transform spawnTransform = null;
+    [SerializeField] private Transform endTransform = null;
+
+    // Delegators
+    public UnityAction OnFinishedSpawnning = null;
+
+    #region Unity Functions
 
     private void Awake()
     {
 
          ActivateWaves();
 
+
     }
 
     private void Update()
     {
-        
-        if(numRunningSequences > 0)
+
+        if (HasSequenceRunning())
         {
             return;
         }
 
         countDown -= Time.deltaTime;
 
-        if(countDown <= 0)
+        if (countDown <= 0)
         {
-            if(currentWaveIndex < levelWaves.Count)
+            if (HasNextWave())
             {
-
                 StartCoroutine(SpawnWave(levelWaves[currentWaveIndex]));
                 currentWaveIndex++;
-                countDown = Mathf.Infinity;
-
+            }
+            else
+            {
+                OnFinishedSpawnning?.Invoke();
             }
         }
 
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.SubscribeToWaveSpanwer(this);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.UnsubscribeToWaveSpawner(this);
+    }
+
+    #endregion
+    #region Public Functions
+
+
+
+    #endregion
+
+    #region Private Functions
+    private bool HasSequenceRunning()
+    {
+        return numRunningSequences > 0;
+    }
+
+    private bool HasNextWave()
+    {
+        return currentWaveIndex < levelWaves.Count;
     }
 
     private IEnumerator SpawnWave(Wave wave)
@@ -64,7 +104,7 @@ public class WaveSpawner : MonoBehaviour
             yield return new WaitUntil(() => numRunningSequences <= 0);
         }
 
-        countDown = 5f;
+        countDown = timeToNextWave;
 
     }
 
@@ -94,5 +134,9 @@ public class WaveSpawner : MonoBehaviour
             wave.PassArrayToQueue();
         }
     }
+    
+    #endregion
+
+
 
 }

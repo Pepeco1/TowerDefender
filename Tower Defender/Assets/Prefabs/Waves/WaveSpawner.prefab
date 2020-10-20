@@ -43,9 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dbdb7b4c5c8fb240ba66fab7e20fea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToNextWave: 3
-  levelWaves:
-  - {fileID: 11400000, guid: 9d8501da3b64bce49a812719d373bcfe, type: 2}
-  - {fileID: 11400000, guid: 2900f61a6475672478038bb33749813d, type: 2}
+  timeToNextWave: 5
+  levelWaves: []
   spawnTransform: {fileID: 0}
   endTransform: {fileID: 0}
